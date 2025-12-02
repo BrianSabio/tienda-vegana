@@ -2,7 +2,7 @@
 
 ¡Bienvenido al MVP de **Tienda sin TACC**! Un e-commerce simple para productos orgánicos, sin gluten y veganos.
 
-![Tienda Preview](https://placehold.co/600x300?text=Tienda+sin+TACC+Preview)
+![Tienda sin TACC Banner](public/assets/banner.png)
 
 ## 🚀 Características
 
