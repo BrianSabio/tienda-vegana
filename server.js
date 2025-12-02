@@ -3,13 +3,15 @@ const cors = require('cors');
 const axios = require('axios');
 const path = require('path');
 
+require('dotenv').config();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // --- CONFIGURACIÓN ---
 // TODO: Reemplaza con tus credenciales reales de CallMeBot
-const PHONE = '56947884339'; // e.g., +34123456789
-const API_KEY = '6271542';    // Get it from CallMeBot
+const PHONE = process.env.PHONE;
+const API_KEY = process.env.API_KEY;
 
 // --- MIDDLEWARE ---
 app.use(cors());

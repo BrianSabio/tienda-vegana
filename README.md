@@ -28,8 +28,13 @@
     ```bash
     npm install
     ```
-3.  **Configura tus credenciales** (Opcional para probar WhatsApp):
-    - Edita `server.js` y coloca tu `PHONE` y `API_KEY` de CallMeBot.
+3.  **Configura tus variables de entorno**:
+    - Crea un archivo `.env` en la raíz del proyecto (puedes copiar el ejemplo de abajo).
+    - Agrega tus credenciales de CallMeBot:
+      ```env
+      PHONE=tu_numero_con_codigo_pais  # ej: 56912345678
+      API_KEY=tu_api_key               # Obtener de CallMeBot
+      ```
 4.  **Inicia el servidor**:
     ```bash
     npm start

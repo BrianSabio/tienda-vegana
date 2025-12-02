@@ -1,76 +1,23 @@
-# Documentación Técnica: Tienda Kosher
+# Documentación Técnica: Variables de Entorno
 
-## 1. Visión General del Proyecto
-Este proyecto es un MVP (Producto Mínimo Viable) de una plataforma de comercio electrónico diseñada específicamente para una tienda de productos Kosher. El objetivo es ofrecer una experiencia de usuario premium, confiable y tradicional, permitiendo a los clientes navegar por un catálogo, gestionar un carrito de compras y finalizar pedidos mediante notificaciones directas a WhatsApp.
+## Cambio Realizado
+Se ha implementado el uso de variables de entorno para manejar credenciales sensibles (`PHONE` y `API_KEY`) en `server.js`.
 
-## 2. Arquitectura del Sistema
+## Motivo
+Evitar la exposición de datos sensibles en el repositorio de código (GitHub).
 
-### 2.1 Backend (Node.js & Express)
-El servidor actúa como una API ligera y servidor de archivos estáticos.
-*   **Tecnologías**: Node.js, Express.
-*   **Responsabilidades**:
-    *   Servir la aplicación frontend (archivos estáticos en `/public`).
-    *   Proveer datos de productos (`GET /api/products`).
-    *   Procesar órdenes y notificar al vendedor (`POST /api/order`).
-*   **Integración Externa**: Utiliza la API de **CallMeBot** para enviar los detalles del pedido al WhatsApp del administrador de la tienda.
+## Implementación
+1.  **Librería `dotenv`**: Se utiliza para cargar las variables desde un archivo `.env` en `process.env`.
+2.  **Archivo `.env`**: Contiene los valores reales de `PHONE` y `API_KEY`. Este archivo está excluido del control de versiones mediante `.gitignore`.
+3.  **Código**: En `server.js`, las constantes ahora se inicializan con `process.env.PHONE` y `process.env.API_KEY`.
 
-### 2.2 Frontend (Vanilla JavaScript)
-La interfaz es una Single Page Application (SPA) construida sin frameworks pesados para maximizar el rendimiento y control.
-*   **Tecnologías**: HTML5 Semántico, CSS3 Moderno, JavaScript ES6+.
-*   **Gestión de Estado**: El estado del carrito se maneja localmente en el cliente y se persiste utilizando `localStorage` para mantener la sesión del usuario entre recargas.
-
-## 3. Estructura del Proyecto
-
-```text
-Tienda Virtual/
-├── public/                 # Archivos estáticos del Frontend
-│   ├── assets/             # Recursos multimedia (imágenes, iconos)
-│   ├── app.js              # Lógica principal del cliente (Carrito, API calls, UI)
-│   ├── index.html          # Estructura semántica de la página única
-│   └── styles.css          # Estilos globales, variables y diseño responsivo
-├── server.js               # Lógica del servidor, endpoints y configuración de CallMeBot
-├── package.json            # Dependencias y scripts del proyecto
-└── technical_document.txt  # Este documento
-```
-
-## 4. Detalles de Implementación y Diseño
-
-### 4.1 Identidad Visual y UI/UX
-El diseño se centra en transmitir "Tradición, Confianza y Calidad Premium", alejándose de la estética genérica.
-*   **Paleta de Colores**:
-    *   `--primary-color` (#1a3c5e): Azul Profundo, evocando seriedad y tradición.
-    *   `--accent-color` (#c5a059): Dorado, para resaltar elementos premium y llamadas a la acción.
-    *   `--bg-color` (#FDFBF7): Blanco Crema, suave a la vista, evitando el blanco clínico.
-*   **Tipografía**:
-    *   *Títulos*: 'Playfair Display' (Serif) para elegancia y encabezados.
-    *   *Cuerpo*: 'Outfit' (Sans-serif) para legibilidad moderna en textos largos.
-
-### 4.2 Flujo de Datos del Pedido
-1.  **Selección**: El usuario añade productos al carrito (array en memoria + `localStorage`).
-2.  **Checkout**: Al confirmar, el frontend envía un payload JSON al backend con los items y el total.
-3.  **Procesamiento**: El backend recibe la orden, formatea un mensaje legible (e.g., "Nueva Orden: 2x Jalá, 1x Vino...") y lo codifica para URL.
-4.  **Notificación**: El backend invoca la API de CallMeBot.
-5.  **Confirmación**: Si la API responde `200 OK`, el frontend limpia el carrito y muestra un mensaje de éxito.
-
-### 4.3 Responsividad
-El sitio adopta un enfoque *Mobile-First*, adaptándose fluidamente a diferentes dispositivos:
-*   **Navegación**: Menú hamburguesa en móviles que se despliega lateralmente; barra de navegación completa en escritorio.
-*   **Grillas**: Layout de productos que pasa de 1 columna en móviles a múltiples columnas en pantallas grandes usando CSS Grid (`repeat(auto-fill, ...)`).
-
-## 5. Configuración y Despliegue
-
-### Requisitos Previos
-*   Node.js instalado.
-*   Cuenta y API Key de CallMeBot (configurada en `server.js`).
-
-### Instalación
-```bash
-npm install
-```
-
-### Ejecución
-```bash
-# Modo desarrollo (o producción simple)
-npm start
-```
-El servidor iniciará por defecto en el puerto 3000 (o el definido en `PORT`).
+## Cómo Debuggear
+Si la aplicación falla al enviar mensajes o no conecta:
+1.  Verificar que el archivo `.env` exista en la raíz del proyecto.
+2.  Verificar que el archivo `.env` tenga el formato correcto:
+    ```
+    PHONE=tu_numero
+    API_KEY=tu_api_key
+    ```
+3.  Asegurarse de que no haya espacios extra alrededor del signo `=`.
+4.  Reiniciar el servidor después de cualquier cambio en `.env`.
