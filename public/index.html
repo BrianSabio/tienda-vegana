@@ -4,143 +4,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda sin TACC</title>
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>Tienda Kosher - Tradición y Calidad</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/ico">
+    <!-- Hoja de Estilos Principal -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts -->
+    <!-- Fuentes de Google: Outfit (Cuerpo) y Playfair Display (Títulos) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:wght@600&display=swap"
         rel="stylesheet">
-    <!-- Font Awesome for Icons -->
+    <!-- Font Awesome para Íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- Header -->
+    <!-- ENCABEZADO (HEADER) -->
     <header>
         <div class="container header-content">
+            <!-- Logotipo -->
             <div class="logo">
-                <i class="fas fa-leaf"></i>
-                <h1>Tienda sin TACC</h1>
-                <span class="tagline">sin gluten & vegano</span>
+                <i class="fas fa-star-of-david"></i>
+                <h1>Tienda Kosher</h1>
+                <span class="tagline">Certificación & Tradición</span>
             </div>
-            <nav>
+
+            <!-- Botón Menú Móvil (Hamburguesa) -->
+            <div class="menu-toggle" id="mobile-menu-btn">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <!-- Navegación Principal -->
+            <nav class="nav-menu" id="nav-menu">
                 <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#products">Productos</a></li>
-                    <li><a href="#">Nosotros</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#" class="nav-link">Inicio</a></li>
+                    <li><a href="#products" class="nav-link">Productos</a></li>
+                    <li><a href="#philosophy" class="nav-link">Kashrut</a></li>
+                    <li><a href="#contact" class="nav-link">Contacto</a></li>
                 </ul>
             </nav>
-            <div class="cart-icon" id="cart-btn">
+
+            <!-- Ícono del Carrito -->
+            <div class="cart-icon-container" id="cart-btn">
                 <i class="fas fa-shopping-cart"></i>
                 <span id="cart-count">0</span>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- SECCIÓN HERO (Portada) -->
     <section class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h2>Alimentación Consciente</h2>
-            <p>Descubre nuestra selección de productos orgánicos, sin gluten y veganos.</p>
-            <a href="#products" class="btn">Ver Productos</a>
+            <h2>Excelencia Kosher</h2>
+            <p>Descubre nuestra selección exclusiva de productos certificados, respetando la tradición y la más alta
+                calidad.</p>
+            <a href="#products" class="btn btn-primary">Ver Catálogo</a>
         </div>
     </section>
 
-    <!-- Products Section -->
+    <!-- SECCIÓN DE PRODUCTOS -->
     <section id="products" class="products-section container">
         <div class="section-header">
             <h2>Productos Destacados</h2>
             <div class="divider"></div>
+            <p class="section-subtitle">Sabores auténticos para tu mesa</p>
         </div>
 
+        <!-- Grid de Productos (Renderizado por JS) -->
         <div id="product-grid" class="product-grid">
-            <!-- Products will be injected here by JS -->
-            <div class="loading">Cargando productos...</div>
-        </div>
-    </section>
-
-    <!-- Features / Philosophy Section -->
-    <section class="philosophy container">
-        <div class="section-header">
-            <h2>Nuestra Filosofía</h2>
-            <div class="divider"></div>
-        </div>
-        <div class="features-grid">
-            <div class="feature">
-                <i class="fas fa-seedling"></i>
-                <h3>100% Orgánico</h3>
-                <p>Cultivos libres de pesticidas y químicos.</p>
-            </div>
-            <div class="feature">
-                <i class="fas fa-bread-slice"></i>
-                <h3>Sin Gluten</h3>
-                <p>Seguro para celíacos e intolerantes.</p>
-            </div>
-            <div class="feature">
-                <i class="fas fa-heart"></i>
-                <h3>Vegano</h3>
-                <p>Respetuoso con los animales y el medio ambiente.</p>
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i> Cargando productos...
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
+    <!-- SECCIÓN FILOSOFÍA -->
+    <section id="philosophy" class="philosophy">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestros Valores</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Certificación Kosher</h3>
+                    <p>Todos nuestros productos cuentan con estricta supervisión rabínica.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bread-slice"></i>
+                    <h3>Calidad Premium</h3>
+                    <p>Ingredientes seleccionados para ofrecerte lo mejor de la cocina judía.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Tradición Familiar</h3>
+                    <p>Recetas transmitidas de generación en generación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer id="contact">
         <div class="container footer-content">
             <div class="footer-col">
-                <h3>Tienda sin TACC</h3>
+                <h3>Tienda Kosher</h3>
+                <p>Llevando la tradición a tu hogar.</p>
                 <div class="socials">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="footer-col">
-                <h4>Enlaces</h4>
+                <h4>Enlaces Rápidos</h4>
                 <ul>
                     <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Productos</a></li>
-                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#products">Catálogo</a></li>
+                    <li><a href="#philosophy">Kashrut</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Newsletter</h4>
+                <p>Recibe ofertas y novedades.</p>
                 <form class="newsletter-form">
-                    <input type="email" placeholder="Tu email">
-                    <button type="submit">Suscribirse</button>
+                    <input type="email" placeholder="Tu correo electrónico">
+                    <button type="submit" class="btn btn-small">Suscribirse</button>
                 </form>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Tienda sin TACC. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Tienda Kosher. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- Cart Sidebar/Modal -->
+    <!-- BARRA LATERAL DEL CARRITO (SIDEBAR) -->
     <div id="cart-sidebar" class="cart-sidebar">
         <div class="cart-header">
-            <h3>Tu Carrito</h3>
-            <button id="close-cart" class="close-btn">&times;</button>
+            <h3>Tu Carrito de Compras</h3>
+            <button id="close-cart" class="close-btn" aria-label="Cerrar carrito">&times;</button>
         </div>
+
+        <!-- Lista de Ítems -->
         <div class="cart-items" id="cart-items">
-            <!-- Cart items injected here -->
+            <!-- Se llena dinámicamente con JS -->
             <p class="empty-cart-msg">Tu carrito está vacío.</p>
         </div>
+
+        <!-- Pie del Carrito -->
         <div class="cart-footer">
             <div class="cart-total">
-                <span>Total:</span>
+                <span>Total Estimado:</span>
                 <span id="cart-total-price">$0.00</span>
             </div>
-            <button id="checkout-btn" class="btn btn-block">Finalizar Compra</button>
+            <button id="checkout-btn" class="btn btn-block" disabled>Carrito Vacío</button>
         </div>
     </div>
+
+    <!-- CAPA OSCURA DE FONDO (OVERLAY) -->
     <div id="overlay" class="overlay"></div>
 
+    <!-- Lógica JavaScript -->
     <script src="app.js"></script>
 </body>
 

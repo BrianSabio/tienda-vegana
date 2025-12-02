@@ -6,8 +6,8 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// --- CONFIGURATION ---
-// TODO: Replace with your actual CallMeBot credentials
+// --- CONFIGURACIÓN ---
+// TODO: Reemplaza con tus credenciales reales de CallMeBot
 const PHONE = '56947884339'; // e.g., +34123456789
 const API_KEY = '6271542';    // Get it from CallMeBot
 
@@ -16,34 +16,30 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// --- DATA (In-Memory Product Catalog) ---
+// --- DATOS (Catálogo de Productos en Memoria) ---
 const products = [
-    { id: 1, name: 'Pan de Masa Madre Sin Gluten', price: 3.00, image: 'https://placehold.co/300x200?text=Pan+Masa+Madre' },
-    { id: 2, name: 'Queso Vegano de Anacardos', price: 4.50, image: 'https://placehold.co/300x200?text=Queso+Vegano' },
-    { id: 3, name: 'Queso Vegano Madre Sin Gluten', price: 2.20, image: 'https://placehold.co/300x200?text=Queso+Madre' },
-    { id: 4, name: 'Harina de Almendras', price: 12.00, image: 'https://placehold.co/300x200?text=Harina+Almendras' },
-    { id: 5, name: 'Aceite de Coco Orgánico', price: 8.50, image: 'https://placehold.co/300x200?text=Aceite+Coco' },
-    { id: 6, name: 'Miel Cruda', price: 9.00, image: 'https://placehold.co/300x200?text=Miel+Cruda' },
-    { id: 7, name: 'Granola Sin Azúcar', price: 5.50, image: 'https://placehold.co/300x200?text=Granola' },
-    { id: 8, name: 'Leche de Avena', price: 2.80, image: 'https://placehold.co/300x200?text=Leche+Avena' },
-    { id: 9, name: 'Tofu Firme', price: 3.20, image: 'https://placehold.co/300x200?text=Tofu' },
-    { id: 10, name: 'Quinoa Real', price: 4.00, image: 'https://placehold.co/300x200?text=Quinoa' },
-    { id: 11, name: 'Semillas de Chía', price: 3.50, image: 'https://placehold.co/300x200?text=Chia' },
-    { id: 12, name: 'Pasta de Lentejas', price: 3.80, image: 'https://placehold.co/300x200?text=Pasta+Lentejas' },
-    { id: 13, name: 'Chocolate 85% Cacao', price: 4.20, image: 'https://placehold.co/300x200?text=Chocolate' },
-    { id: 14, name: 'Té Matcha', price: 15.00, image: 'https://placehold.co/300x200?text=Matcha' },
-    { id: 15, name: 'Sirope de Agave', price: 6.00, image: 'https://placehold.co/300x200?text=Agave' },
-    { id: 16, name: 'Mantequilla de Maní', price: 5.00, image: 'https://placehold.co/300x200?text=Mantequilla+Mani' }
+    { id: 1, name: 'Jalá Trenzada Tradicional', price: 4.50, image: 'https://placehold.co/300x200?text=Jala+Trenzada' },
+    { id: 2, name: 'Babka de Chocolate', price: 8.00, image: 'https://placehold.co/300x200?text=Babka+Chocolate' },
+    { id: 3, name: 'Hummus Casero Premium', price: 5.50, image: 'https://placehold.co/300x200?text=Hummus' },
+    { id: 4, name: 'Matzá Artesanal', price: 6.00, image: 'https://placehold.co/300x200?text=Matza' },
+    { id: 5, name: 'Vino Kosher Cabernet', price: 15.00, image: 'https://placehold.co/300x200?text=Vino+Kosher' },
+    { id: 6, name: 'Rugelach de Canela', price: 7.50, image: 'https://placehold.co/300x200?text=Rugelach' },
+    { id: 7, name: 'Gefilte Fish Casero', price: 9.00, image: 'https://placehold.co/300x200?text=Gefilte+Fish' },
+    { id: 8, name: 'Pastrami Ahumado', price: 12.00, image: 'https://placehold.co/300x200?text=Pastrami' },
+    { id: 9, name: 'Borekas de Papa', price: 6.50, image: 'https://placehold.co/300x200?text=Borekas' },
+    { id: 10, name: 'Tahini Puro', price: 5.00, image: 'https://placehold.co/300x200?text=Tahini' },
+    { id: 11, name: 'Falafel Congelado', price: 7.00, image: 'https://placehold.co/300x200?text=Falafel' },
+    { id: 12, name: 'Miel Kosher para Rosh Hashaná', price: 8.50, image: 'https://placehold.co/300x200?text=Miel+Kosher' }
 ];
 
-// --- ENDPOINTS ---
+// --- RUTAS (ENDPOINTS) ---
 
-// GET /api/products - Retrieve all products
+// GET /api/products - Obtener todos los productos
 app.get('/api/products', (req, res) => {
     res.json(products);
 });
 
-// POST /api/order - Process order and notify via WhatsApp
+// POST /api/order - Procesar pedido y notificar vía WhatsApp
 app.post('/api/order', async (req, res) => {
     try {
         const { items, total } = req.body;
@@ -52,8 +48,8 @@ app.post('/api/order', async (req, res) => {
             return res.status(400).json({ error: 'El carrito está vacío' });
         }
 
-        // Format message for WhatsApp
-        let message = `*Nuevo Pedido - Tienda sin TACC*\n\n`;
+        // Formatear mensaje para WhatsApp
+        let message = `*Nuevo Pedido - Tienda Kosher*\n\n`;
         items.forEach(item => {
             message += `- ${item.name} (x${item.quantity}): $${(item.price * item.quantity).toFixed(2)}\n`;
         });
@@ -62,7 +58,7 @@ app.post('/api/order', async (req, res) => {
         const encodedMessage = encodeURIComponent(message);
         const callMeBotUrl = `https://api.callmebot.com/whatsapp.php?phone=${PHONE}&text=${encodedMessage}&apikey=${API_KEY}`;
 
-        // Send request to CallMeBot
+        // Enviar petición a CallMeBot
         await axios.get(callMeBotUrl);
 
         console.log('Pedido enviado a WhatsApp:', message);
@@ -74,7 +70,7 @@ app.post('/api/order', async (req, res) => {
     }
 });
 
-// Start Server
+// Iniciar Servidor
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

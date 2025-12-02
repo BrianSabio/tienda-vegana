@@ -1,49 +1,71 @@
-# Documentación Técnica - Tienda sin TACC
+# Documentación Técnica: Tienda Kosher
 
-## Resumen
-Este documento describe la arquitectura y lógica detrás del MVP de "Tienda sin TACC", una aplicación de e-commerce para productos orgánicos.
+## Visión General
+Este proyecto es un MVP (Producto Mínimo Viable) de un e-commerce para productos certificados Kosher. La aplicación permite a los usuarios navegar por un catálogo de productos, agregar ítems a un carrito de compras persistente, y realizar pedidos que son notificados automáticamente al dueño de la tienda a través de WhatsApp.
 
-## Arquitectura
+## Arquitectura del Sistema
 
-### Backend (Node.js + Express)
-El servidor actúa como una API REST simple y un servidor de archivos estáticos.
-- **Servidor Web**: Utilizamos `Express` para manejar las rutas HTTP.
-- **Base de Datos en Memoria**: Para este MVP, los productos se almacenan en un array constante `products` en `server.js`. Esto evita la complejidad de configurar una base de datos real (como MongoDB o SQL) en esta etapa.
-- **Integración Externa**: Se utiliza `axios` para realizar peticiones HTTP a la API de CallMeBot. Esto permite enviar notificaciones de WhatsApp sin necesidad de un SDK complejo de Meta.
+### Backend (Node.js & Express)
+El servidor (`server.js`) actúa como una API REST simple y servidor de archivos estáticos.
 
-### Frontend (Vanilla JS + HTML/CSS)
-El frontend es una Single Page Application (SPA) simplificada que consume la API del backend.
-- **Renderizado Dinámico**: `app.js` realiza una petición `fetch('/api/products')` al cargar la página y genera el HTML de los productos dinámicamente insertando elementos en el DOM.
-- **Gestión de Estado (Carrito)**:
-  - El carrito se mantiene en una variable global `cart`.
-  - **Persistencia**: Se utiliza `localStorage` para guardar el carrito y un timestamp (`timestamp`).
-  - **Lógica de Expiración**: Al cargar la página, se compara el timestamp guardado con la hora actual. Si han pasado más de 2 horas (`CART_EXPIRY_HOURS`), se borra el carrito del `localStorage`.
+*   **Tecnologías**: Node.js, Express, Axios, CORS.
+*   **Endpoints**:
+    *   `GET /api/products`: Retorna la lista de productos en formato JSON. Los datos están actualmente en memoria (array `products`).
+    *   `POST /api/order`: Recibe los detalles del pedido (items y total).
+        *   Valida que el carrito no esté vacío.
+        *   Formatea un mensaje de texto con el resumen del pedido.
+        *   Utiliza la API de **CallMeBot** para enviar este mensaje a WhatsApp.
+*   **Configuración**:
+    *   Puerto: `process.env.PORT` o `3000`.
+    *   Credenciales CallMeBot: Constantes `PHONE` y `API_KEY` (deben ser configuradas en el código).
+
+### Frontend (Vanilla JS, HTML, CSS)
+La interfaz de usuario es una Single Page Application (SPA) simple servida estáticamente.
+
+*   **Estructura (`index.html`)**:
+    *   Semántica HTML5.
+    *   Secciones: Header (Navegación, Carrito), Hero, Productos (Grid), Filosofía, Footer.
+    *   Componentes Modales: Sidebar del carrito, Overlay.
+*   **Estilos (`styles.css`)**:
+    *   **Diseño**: Uso de Variables CSS (`:root`) para consistencia de colores y espaciado.
+    *   **Layout**: Flexbox y CSS Grid para la disposición de elementos.
+    *   **Tipografía**: Google Fonts (Outfit y Playfair Display).
+    *   **Responsividad**: Diseño adaptable para móviles y escritorio (ver sección Responsividad).
+*   **Lógica (`app.js`)**:
+    *   **Estado**: Variable `cart` global para manejar el estado del carrito.
+    *   **Persistencia**: Uso de `localStorage` para guardar el carrito (`tienda_kosher_cart`).
+    *   **Expiración**: Lógica para limpiar el carrito automáticamente después de 2 horas.
+    *   **Interacción**: Funciones para agregar/eliminar items, calcular totales y renderizar el DOM dinámicamente.
+    *   **Comunicación**: `fetch` API para obtener productos y enviar pedidos al backend.
+
+## Implementación de Responsividad (Mobile-First / Adaptive)
+Se realizaron modificaciones específicas para asegurar una experiencia óptima en dispositivos móviles.
+
+1.  **Menú de Navegación Móvil**:
+    *   Se implementó un patrón de "Menú Hamburguesa" (`.menu-toggle`).
+    *   En pantallas menores a 768px, el menú de navegación se transforma en un sidebar deslizante (`.nav-menu`).
+    *   Animaciones CSS para la transición del icono de hamburguesa a una "X" de cierre.
+
+2.  **Grid de Productos Adaptable**:
+    *   Escritorio: Múltiples columnas (`repeat(auto-fill, minmax(250px, 1fr))`).
+    *   Móvil (<480px): Una sola columna para maximizar la visibilidad de las imágenes y detalles.
+
+3.  **Ajustes de Diseño**:
+    *   Reducción de altura en la sección Hero (`50vh` en móvil).
+    *   Ajuste de tamaños de fuente (`h1`, `h2`) para evitar desbordamientos.
+    *   Reorganización del Footer a una sola columna centrada.
 
 ## Flujo de Datos
-
-1.  **Carga de Productos**: Frontend -> GET `/api/products` -> Backend responde con JSON.
-2.  **Agregar al Carrito**: Interacción local en el navegador. Actualiza `cart` y `localStorage`.
+1.  **Carga**: El frontend solicita `/api/products`.
+2.  **Interacción**: El usuario agrega productos -> `cart` se actualiza -> `localStorage` se guarda -> UI se repinta.
 3.  **Checkout**:
-    - El usuario hace clic en "Finalizar Compra".
-    - Frontend envía POST `/api/order` con los ítems y el total.
-    - Backend recibe el pedido, formatea un mensaje de texto.
-    - Backend llama a `https://api.callmebot.com/...`.
-    - Backend responde al Frontend con éxito.
-    - Frontend limpia el carrito y notifica al usuario.
+    *   Usuario hace clic en "Finalizar Compra".
+    *   Frontend envía POST a `/api/order` con el payload `{ items: [...], total: 100 }`.
+    *   Backend recibe, formatea mensaje y llama a CallMeBot.
+    *   Backend responde con éxito.
+    *   Frontend limpia el carrito y notifica al usuario.
 
-## Conceptos Clave
-- **API REST**: Separación clara entre datos (Backend) y presentación (Frontend).
-- **Asincronía**: Uso de `async/await` para manejar operaciones que toman tiempo (peticiones de red) sin bloquear el hilo principal.
-- **Persistencia Local**: Uso de `localStorage` para mantener el estado del usuario entre recargas de página sin necesidad de sesiones de servidor o cookies complejas.
-
-## Despliegue (Deployment)
-
-### Compatibilidad con Render
-- **Puerto Dinámico**: Se modificó `server.js` para usar `process.env.PORT`. Render (y otros servicios en la nube) asignan un puerto dinámico mediante esta variable de entorno. Si no existe, por defecto usa el 3000.
-- **Git**: Se inicializó un repositorio local y se creó un `.gitignore` para excluir `node_modules` y archivos sensibles.
-
-### Pasos para Desplegar
-1. Crear un repositorio en GitHub.
-2. Seguir las instrucciones para hacer "push" del código local.
-3. Conectar el repositorio a Render.com como un "Web Service".
-4. Render detectará automáticamente `npm install` y `npm start`.
+## Guía de Mantenimiento
+*   **Agregar Productos**: Editar el array `products` en `server.js`.
+*   **Cambiar Estilos**: Modificar variables en `:root` de `styles.css`.
+*   **Configurar WhatsApp**: Actualizar `PHONE` y `API_KEY` en `server.js`.

@@ -1,17 +1,19 @@
-# 🌿 Tienda sin TACC
+# ✡️ Tienda Kosher
 
-¡Bienvenido al MVP de **Tienda sin TACC**! Un e-commerce simple para productos orgánicos, sin gluten y veganos.
+¡Bienvenido al MVP de **Tienda Kosher**! Un e-commerce dedicado a productos certificados, respetando la tradición y la calidad.
 
-![Tienda sin TACC Banner](public/assets/banner.png)
+![Tienda Kosher Banner](public/assets/banner.png)
 
 ## 🚀 Características
 
-- **🛒 Catálogo Dinámico**: 16 productos exclusivos cargados desde el servidor.
+- **🛒 Catálogo Dinámico**: Productos exclusivos Kosher cargados desde el servidor.
 - **🛍️ Carrito Inteligente**: 
   - Persistencia local (no pierdes tu carrito si recargas).
   - **Auto-expiración**: Por seguridad y stock, el carrito se vacía automáticamente después de 2 horas.
 - **📱 Pedidos por WhatsApp**: Integración directa. Al finalizar la compra, el dueño recibe un mensaje con el detalle del pedido.
-- **🎨 Diseño Premium**: Interfaz limpia, moderna y responsive (móvil y escritorio).
+- **🎨 Diseño Premium y Responsivo**: 
+  - Interfaz limpia y moderna.
+  - **100% Mobile-Friendly**: Menú hamburguesa, grids adaptables y tipografía ajustada para smartphones.
 
 ## 🛠️ Tecnologías Usadas
 
@@ -40,4 +42,4 @@ Este proyecto está listo para ser desplegado en **Render** u otros servicios de
 - El puerto se configura automáticamente con `process.env.PORT`.
 
 ---
-Hecho con 💚 para una alimentación consciente.
+Hecho con 💙 para la comunidad.

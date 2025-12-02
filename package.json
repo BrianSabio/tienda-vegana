@@ -1,7 +1,7 @@
 {
-  "name": "tienda-sin-tacc",
+  "name": "tienda-kosher",
   "version": "1.0.0",
-  "description": "MVP e-commerce for organic products",
+  "description": "MVP e-commerce for Kosher products",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
