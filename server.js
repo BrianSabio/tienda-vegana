@@ -20,18 +20,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // --- DATOS (Catálogo de Productos en Memoria) ---
 const products = [
-    { id: 1, name: 'Jalá Trenzada Tradicional', price: 4.50, image: 'https://placehold.co/300x200?text=Jala+Trenzada' },
-    { id: 2, name: 'Babka de Chocolate', price: 8.00, image: 'https://placehold.co/300x200?text=Babka+Chocolate' },
-    { id: 3, name: 'Hummus Casero Premium', price: 5.50, image: 'https://placehold.co/300x200?text=Hummus' },
-    { id: 4, name: 'Matzá Artesanal', price: 6.00, image: 'https://placehold.co/300x200?text=Matza' },
-    { id: 5, name: 'Vino Kosher Cabernet', price: 15.00, image: 'https://placehold.co/300x200?text=Vino+Kosher' },
-    { id: 6, name: 'Rugelach de Canela', price: 7.50, image: 'https://placehold.co/300x200?text=Rugelach' },
-    { id: 7, name: 'Gefilte Fish Casero', price: 9.00, image: 'https://placehold.co/300x200?text=Gefilte+Fish' },
-    { id: 8, name: 'Pastrami Ahumado', price: 12.00, image: 'https://placehold.co/300x200?text=Pastrami' },
-    { id: 9, name: 'Borekas de Papa', price: 6.50, image: 'https://placehold.co/300x200?text=Borekas' },
-    { id: 10, name: 'Tahini Puro', price: 5.00, image: 'https://placehold.co/300x200?text=Tahini' },
-    { id: 11, name: 'Falafel Congelado', price: 7.00, image: 'https://placehold.co/300x200?text=Falafel' },
-    { id: 12, name: 'Miel Kosher para Rosh Hashaná', price: 8.50, image: 'https://placehold.co/300x200?text=Miel+Kosher' }
+    { id: 1, name: 'Pasta de Maní Natural Entrenuts 370 gr.', price: 3000, image: '/assets/pasta-mani-natural.jpg' },
+    { id: 2, name: 'Pasta de Maní Crocante Entrenuts 370 gr.', price: 3000, image: '/assets/pasta-mani-crocante.jpg' },
+    { id: 3, name: 'Pasta de Maní Coco Entrenuts 370 gr.', price: 3000, image: '/assets/pasta-mani-coco.jpg' },
+    { id: 4, name: 'Pasta de Maní Stevia Entrenuts 370 gr.', price: 3000, image: '/assets/pasta-mani-stevia.jpg' },
+    { id: 5, name: 'Avena Instantánea Cumaná 400 gr.', price: 3000, image: '/assets/avena-instantanea.jpg' },
+    { id: 6, name: 'Avena Tradicional Cumaná 400 gr.', price: 3000, image: '/assets/avena-tradicional.jpg' },
+    { id: 7, name: 'Mix Semillas Ensalada Cumaná 250 gr.', price: 2500, image: '/assets/mix-semillas-ensalada.jpg' },
+    { id: 8, name: 'Mix Semillas Desayuno Cumaná 250 gr.', price: 2500, image: '/assets/mix-semillas-desayuno.jpg' },
+    { id: 9, name: 'Semillas de Chía Cumaná 1 kg.', price: 12000, image: '/assets/semillas-chia.jpg' },
+    { id: 10, name: 'Semillas de Lino Cumaná 1 kg.', price: 5000, image: '/assets/semillas-lino.jpg' },
+    { id: 11, name: 'Semillas de Sésamo Cumaná 1 kg.', price: 7000, image: '/assets/semillas-sesamo.jpg' },
+    { id: 12, name: 'Semillas de Girasol Cumaná 1 kg.', price: 7000, image: '/assets/semillas-girasol.jpg' },
+    { id: 13, name: 'Semillas de Fenogreco Cumaná 1 kg.', price: 8000, image: '/assets/semillas-fenogreco.jpg' },
+    { id: 14, name: 'Semillas de Mostaza Cumaná 1 kg.', price: 7000, image: '/assets/semillas-mostaza.jpg' },
+    { id: 15, name: 'Cúrcuma en Polvo Cumaná 1 kg.', price: 9000, image: '/assets/curcuma-polvo.jpg' },
+    { id: 16, name: 'Harina de Coco Cumaná 1 kg.', price: 9000, image: '/assets/harina-coco.jpg' }
 ];
 
 // --- RUTAS (ENDPOINTS) ---
